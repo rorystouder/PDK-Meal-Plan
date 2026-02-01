@@ -212,10 +212,9 @@ const recipes = [
 
 // ============ QUICK ADD ITEMS ============
 const quickAddItems = {
-  "🧊 Fridge": ["Eggs","Chicken breast","Ground turkey","Shrimp","Salmon","Almond butter","Hummus","Tortillas","Coconut aminos"],
-  "❄️ Freezer": ["Frozen peas","Frozen corn","Frozen berries","Turkey sausage","Frozen shrimp"],
-  "🏠 Pantry": ["Rice","Pasta","Oats","Black beans (no salt)","Olive oil","Coconut oil","Maple syrup","Honey","Low-sodium broth","Diced tomatoes (no salt)","Flour tortillas"],
-  "🥦 Produce": ["Avocados","Bananas","Lemons","Bell peppers","Onions","Garlic","Zucchini","Broccoli","Sweet potatoes","Potatoes","Baby spinach","Cucumber","Cherry tomatoes","Cilantro","Parsley","Apples","Carrots"]
+  "🥩 Proteins": ["Eggs","Chicken breast","Turkey sausage","Smoked turkey","Beef stir fry","Shrimp","Tuna (canned)","Breakfast sausage","Breakfast links"],
+  "🥦 Produce": ["Avocados","Bananas","Lemons","Bell peppers","Red onion","Yellow onion","Garlic","Ginger","Zucchini","Broccoli","Cauliflower","Sweet potatoes","Asparagus","Cucumber","Romaine","Tomatoes","Grape tomatoes","Cilantro","Parsley","Basil","Dill","Rosemary","Blueberries","Apples"],
+  "🏠 Pantry": ["Rice","Tortillas","Olive oil","Hummus","Mustard","Kalamata olives","Walnuts","Nut & seed mix","Black pepper"],
 };
 
 // ============ STORE SECTIONS MAPPING ============
@@ -296,12 +295,15 @@ function toggleRecipe(id) {
 function renderPantry() {
   const locs = ["🧊 Fridge","❄️ Freezer","🏠 Pantry","🥦 Produce"];
   const now = Date.now();
-  // Quick add buttons
-  const loc = document.getElementById('pantry-loc').value;
-  const items = quickAddItems[loc]||[];
-  document.getElementById('quick-add-btns').innerHTML = items.map(i=>
-    `<button onclick="prefillPantryItem('${i}')" class="text-xs px-2 py-1 rounded-full bg-brand-100 text-brand-700 hover:bg-brand-200">${i}</button>`
-  ).join('');
+  // Quick add buttons - show all categories
+  let qhtml = '';
+  for(const [cat, items] of Object.entries(quickAddItems)) {
+    qhtml += `<p class="text-xs text-stone-500 mt-2 mb-1 w-full">${cat}</p>`;
+    qhtml += items.map(i=>
+      `<button onclick="prefillPantryItem('${i}')" class="text-xs px-2 py-1 rounded-full bg-brand-100 text-brand-700 hover:bg-brand-200">${i}</button>`
+    ).join('');
+  }
+  document.getElementById('quick-add-btns').innerHTML = qhtml;
   // Pantry list
   let html = '';
   for(const l of locs) {
