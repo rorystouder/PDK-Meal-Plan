@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PKD Meal Plan</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .page-break { page-break-before: always; }
+  body { font-size: 11pt; }
+  section { break-inside: avoid; }
+}
+.print-only { display: none; }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+<!-- Nav -->
+<nav class="no-print sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-stone-200">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex flex-wrap gap-3 text-sm font-medium">
+    <a href="#rotation" class="text-emerald-700 hover:underline">Mon–Thu</a>
+    <a href="#variety" class="text-emerald-700 hover:underline">Fri–Sun</a>
+    <a href="#prep" class="text-emerald-700 hover:underline">Sunday Prep</a>
+    <a href="#shopping" class="text-emerald-700 hover:underline">Shopping List</a>
+    <button onclick="window.print()" class="ml-auto text-stone-500 hover:text-stone-800">🖨️ Print</button>
+  </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-4 py-8 space-y-16">
+
+<!-- Header -->
+<header class="text-center space-y-2">
+  <h1 class="text-4xl font-bold text-emerald-800">🥬 PKD Meal Plan</h1>
+  <p class="text-stone-500">No dairy · No soy · Low sodium (&lt;2,000mg/day) · PKD-friendly</p>
+  <p class="text-stone-400 text-sm">💧 Drink 3L+ water daily · Moderate protein · Plant-forward</p>
+</header>
+
+<!-- ════════════════════════════════════════ -->
+<!-- THE ROTATION (Mon-Thu) -->
+<!-- ════════════════════════════════════════ -->
+<section id="rotation">
+  <div class="bg-emerald-800 text-white rounded-2xl p-6 mb-8">
+    <h2 class="text-2xl font-bold">🔄 The Rotation — Monday through Thursday</h2>
+    <p class="text-emerald-200 mt-1">Same meals every day. Batch cook Sunday, eat all week. Zero decisions.</p>
+  </div>
+
+  <!-- Breakfast -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <h3 class="text-xl font-bold text-amber-700">☀️ Breakfast — Loaded Veggie Egg Scramble</h3>
+      <span class="text-sm bg-amber-100 text-amber-800 px-3 py-1 rounded-full">10 min · ~280mg sodium</span>
+    </div>
+    <p class="text-stone-500 mb-4">Big, savory, filling. Replaces the old 4-egg + sausage routine with more veg and less sodium.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h4 class="font-semibold mb-2">Ingredients (per day)</h4>
+        <ul class="space-y-1 text-sm">
+          <li>3 large eggs</li>
+          <li>1 cup baby spinach</li>
+          <li>½ bell pepper, diced</li>
+          <li>¼ cup mushrooms, sliced</li>
+          <li>1 tbsp olive oil</li>
+          <li>2 slices no-salt-added bread, toasted</li>
+          <li>½ avocado, sliced</li>
+          <li>Black pepper, garlic powder to taste</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Steps</h4>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Heat olive oil in a pan over medium heat.</li>
+          <li>Sauté peppers and mushrooms 2-3 min.</li>
+          <li>Add spinach, cook 1 min until wilted.</li>
+          <li>Push veggies to side, scramble eggs in same pan.</li>
+          <li>Mix together, season with pepper & garlic powder.</li>
+          <li>Serve over toast with avocado on the side.</li>
+        </ol>
+        <p class="text-xs text-stone-400 mt-3">💡 Veggies are pre-chopped from Sunday prep — just dump and cook.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lunch -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <h3 class="text-xl font-bold text-emerald-700">🥗 Lunch — Chicken & Rice Power Bowl</h3>
+      <span class="text-sm bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">5 min (reheated) · ~350mg sodium</span>
+    </div>
+    <p class="text-stone-500 mb-4">Batch-cooked chicken and rice with roasted veg. Grab from the fridge, microwave, eat.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h4 class="font-semibold mb-2">Ingredients (per day)</h4>
+        <ul class="space-y-1 text-sm">
+          <li>6 oz chicken breast (from Sunday batch)</li>
+          <li>1 cup cooked brown rice</li>
+          <li>1 cup roasted broccoli & zucchini</li>
+          <li>½ avocado</li>
+          <li>2 tbsp homemade lemon-herb dressing (below)</li>
+          <li>Squeeze of lemon</li>
+        </ul>
+        <div class="mt-3 p-3 bg-stone-50 rounded-lg text-xs">
+          <strong>Lemon-Herb Dressing (makes ~1 cup):</strong><br>
+          ½ cup olive oil, ¼ cup lemon juice, 2 cloves garlic (minced), 1 tsp dried oregano, 1 tsp dried basil, black pepper. Shake in a jar. Keeps all week.
+        </div>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Steps</h4>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Scoop rice into bowl.</li>
+          <li>Add sliced chicken and roasted veggies.</li>
+          <li>Microwave 2 min if cold.</li>
+          <li>Top with avocado and dressing.</li>
+          <li>Squeeze lemon over top.</li>
+        </ol>
+        <p class="text-xs text-stone-400 mt-3">💡 All components pre-made Sunday. Assembly only.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dinner -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <h3 class="text-xl font-bold text-indigo-700">🍽️ Dinner — One-Pan Italian Sausage & Peppers with Pasta</h3>
+      <span class="text-sm bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">20 min · ~420mg sodium</span>
+    </div>
+    <p class="text-stone-500 mb-4">Hearty, simple, and feels like a real dinner. Uses low-sodium Italian sausage.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h4 class="font-semibold mb-2">Ingredients (per day)</h4>
+        <ul class="space-y-1 text-sm">
+          <li>1 link (4 oz) Italian turkey sausage (no-salt-added if possible)</li>
+          <li>1 cup penne or rotini pasta</li>
+          <li>1 bell pepper, sliced</li>
+          <li>½ medium onion, sliced</li>
+          <li>2 cloves garlic, minced</li>
+          <li>½ cup no-salt-added crushed tomatoes</li>
+          <li>1 tbsp olive oil</li>
+          <li>1 tsp Italian seasoning, red pepper flakes</li>
+          <li>Fresh basil if you have it</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Steps</h4>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Boil pasta per package directions. Drain, set aside.</li>
+          <li>Slice sausage into rounds. Brown in olive oil, 4 min.</li>
+          <li>Add peppers and onion, cook 5 min.</li>
+          <li>Add garlic, cook 30 seconds.</li>
+          <li>Pour in crushed tomatoes and Italian seasoning.</li>
+          <li>Simmer 3 min, toss in pasta.</li>
+          <li>Plate and top with basil.</li>
+        </ol>
+        <p class="text-xs text-stone-400 mt-3">💡 Peppers & onions are pre-sliced from Sunday. Sausage pre-portioned in fridge.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Snacks -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <h3 class="text-xl font-bold text-rose-700">🍎 Daily Snacks</h3>
+      <span class="text-sm bg-rose-100 text-rose-800 px-3 py-1 rounded-full">~150mg sodium total</span>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div class="bg-stone-50 rounded-lg p-4">
+        <strong>Mid-Morning</strong><br>
+        Apple + 2 tbsp unsalted almond butter
+      </div>
+      <div class="bg-stone-50 rounded-lg p-4">
+        <strong>Afternoon</strong><br>
+        Handful unsalted mixed nuts (¼ cup) + a banana
+      </div>
+      <div class="bg-stone-50 rounded-lg p-4">
+        <strong>Evening (optional)</strong><br>
+        Carrots & celery + homemade hummus (no-salt-added chickpeas, tahini, lemon, garlic)
+      </div>
+    </div>
+    <div class="mt-4 p-4 bg-amber-50 rounded-lg text-sm">
+      <strong>📊 Daily Sodium Estimate (Mon–Thu):</strong> Breakfast ~280 + Lunch ~350 + Dinner ~420 + Snacks ~150 = <strong class="text-emerald-700">~1,200mg total</strong> — well under 2,000mg limit.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- MIX IT UP (Fri-Sun) -->
+<!-- ════════════════════════════════════════ -->
+<section id="variety">
+  <div class="bg-violet-800 text-white rounded-2xl p-6 mb-8">
+    <h2 class="text-2xl font-bold">🎲 Mix It Up — Friday, Saturday, Sunday</h2>
+    <p class="text-violet-200 mt-1">Three different meals for variety days. Cook fresh or use any leftovers from the week.</p>
+  </div>
+
+  <h3 class="text-lg font-bold text-stone-600 mb-4 uppercase tracking-wide">Breakfasts</h3>
+
+  <!-- Fri Breakfast -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-amber-700">🥞 Friday — Banana Oat Pancakes</h4>
+      <span class="text-sm bg-amber-100 text-amber-800 px-3 py-1 rounded-full">15 min · ~200mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>1 cup rolled oats (blended into flour)</li>
+          <li>2 ripe bananas, mashed</li>
+          <li>2 eggs</li>
+          <li>½ tsp cinnamon</li>
+          <li>1 tsp baking powder</li>
+          <li>1 tbsp coconut oil</li>
+          <li>Maple syrup & berries to serve</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Blend oats into flour. Mix with mashed banana, eggs, cinnamon, baking powder.</li>
+          <li>Heat coconut oil in pan over medium heat.</li>
+          <li>Pour ¼ cup batter per pancake. Cook 2 min per side.</li>
+          <li>Top with berries and a drizzle of maple syrup.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sat Breakfast -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-amber-700">🥑 Saturday — Avocado Toast with Eggs</h4>
+      <span class="text-sm bg-amber-100 text-amber-800 px-3 py-1 rounded-full">10 min · ~300mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>2 slices no-salt-added bread, toasted</li>
+          <li>1 avocado, mashed</li>
+          <li>2 eggs (fried or poached)</li>
+          <li>Cherry tomatoes, halved</li>
+          <li>Red pepper flakes, black pepper</li>
+          <li>Squeeze of lemon</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Toast bread. Spread mashed avocado on each slice.</li>
+          <li>Fry or poach eggs to preference.</li>
+          <li>Top toast with eggs and tomatoes.</li>
+          <li>Season with pepper, red pepper flakes, lemon.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sun Breakfast -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-amber-700">🫐 Sunday — Overnight Oats</h4>
+      <span class="text-sm bg-amber-100 text-amber-800 px-3 py-1 rounded-full">5 min (prep night before) · ~50mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>1 cup rolled oats</li>
+          <li>1 cup oat milk (unsweetened)</li>
+          <li>1 tbsp chia seeds</li>
+          <li>1 tbsp maple syrup</li>
+          <li>½ cup mixed berries</li>
+          <li>2 tbsp unsalted almond butter</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Saturday night: mix oats, oat milk, chia seeds, maple syrup in a jar.</li>
+          <li>Refrigerate overnight.</li>
+          <li>Morning: top with berries and almond butter. Eat cold.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-lg font-bold text-stone-600 mb-4 uppercase tracking-wide">Lunches</h3>
+
+  <!-- Fri Lunch -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-emerald-700">🌯 Friday — Turkey Lettuce Wraps</h4>
+      <span class="text-sm bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">15 min · ~380mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>8 oz ground turkey</li>
+          <li>Large butter lettuce leaves (for wraps)</li>
+          <li>1 cup shredded carrots</li>
+          <li>½ cucumber, diced</li>
+          <li>2 green onions, sliced</li>
+          <li>1 tbsp rice vinegar</li>
+          <li>1 tsp sesame oil</li>
+          <li>1 tsp fresh ginger, grated</li>
+          <li>Lime wedges</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Brown ground turkey with ginger over medium-high heat, 6 min.</li>
+          <li>Add rice vinegar and sesame oil, stir.</li>
+          <li>Spoon into lettuce leaves.</li>
+          <li>Top with carrots, cucumber, green onions.</li>
+          <li>Squeeze lime over top.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sat Lunch -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-emerald-700">🍲 Saturday — Black Bean & Sweet Potato Bowl</h4>
+      <span class="text-sm bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">25 min · ~300mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>1 large sweet potato, cubed</li>
+          <li>1 can (15 oz) no-salt-added black beans, drained</li>
+          <li>1 cup brown rice (leftover from week)</li>
+          <li>½ avocado</li>
+          <li>1 tsp cumin, 1 tsp chili powder</li>
+          <li>1 tbsp olive oil</li>
+          <li>Lime, cilantro</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Toss sweet potato cubes in olive oil, cumin, chili powder.</li>
+          <li>Roast at 425°F for 20 min (or microwave 8 min).</li>
+          <li>Warm black beans in a small pot.</li>
+          <li>Bowl: rice, sweet potato, black beans, avocado.</li>
+          <li>Top with lime juice and cilantro.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sun Lunch -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-emerald-700">🥚 Sunday — Big Veggie Omelette</h4>
+      <span class="text-sm bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">15 min · ~320mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>3 eggs</li>
+          <li>1 cup mixed veggies (peppers, onions, mushrooms, spinach)</li>
+          <li>1 tbsp olive oil</li>
+          <li>½ avocado</li>
+          <li>2 slices toast</li>
+          <li>Hot sauce (optional)</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Sauté veggies in olive oil 3 min.</li>
+          <li>Beat eggs, pour over veggies.</li>
+          <li>Cook until set, fold in half.</li>
+          <li>Serve with avocado and toast.</li>
+        </ol>
+        <p class="text-xs text-stone-400 mt-2">💡 Use up any leftover veggies from the week.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-lg font-bold text-stone-600 mb-4 uppercase tracking-wide">Dinners</h3>
+
+  <!-- Fri Dinner -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-indigo-700">🐟 Friday — Lemon Herb Salmon with Roasted Veggies</h4>
+      <span class="text-sm bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">25 min · ~350mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>6 oz salmon fillet</li>
+          <li>1 cup asparagus, trimmed</li>
+          <li>1 cup cherry tomatoes</li>
+          <li>2 tbsp olive oil</li>
+          <li>1 lemon (juice + slices)</li>
+          <li>2 cloves garlic, minced</li>
+          <li>Fresh dill or dried herbs</li>
+          <li>Black pepper</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Preheat oven to 400°F. Line sheet pan with foil.</li>
+          <li>Arrange salmon in center, veggies around it.</li>
+          <li>Drizzle everything with olive oil, lemon juice, garlic.</li>
+          <li>Season with herbs and pepper. Add lemon slices on salmon.</li>
+          <li>Roast 18-20 min until salmon flakes easily.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sat Dinner -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-indigo-700">🌮 Saturday — Chicken Tacos</h4>
+      <span class="text-sm bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">20 min · ~400mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>8 oz chicken breast, sliced thin</li>
+          <li>4 corn tortillas</li>
+          <li>1 cup shredded cabbage</li>
+          <li>½ avocado, sliced</li>
+          <li>¼ cup pickled onions (red onion + lime juice + vinegar)</li>
+          <li>1 tsp cumin, 1 tsp chili powder, ½ tsp smoked paprika</li>
+          <li>1 tbsp olive oil</li>
+          <li>Lime wedges, cilantro</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Season chicken with cumin, chili powder, paprika.</li>
+          <li>Cook in olive oil over high heat, 4-5 min per side.</li>
+          <li>Slice into strips.</li>
+          <li>Warm tortillas in dry pan 30 sec each side.</li>
+          <li>Load tacos: chicken, cabbage, avocado, pickled onions.</li>
+          <li>Squeeze lime, add cilantro.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sun Dinner -->
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+      <h4 class="text-lg font-bold text-indigo-700">🍝 Sunday — Garlic Shrimp Pasta</h4>
+      <span class="text-sm bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">20 min · ~450mg sodium</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Ingredients</h5>
+        <ul class="space-y-1 text-sm">
+          <li>8 oz shrimp, peeled & deveined</li>
+          <li>2 cups spaghetti or linguine</li>
+          <li>4 cloves garlic, sliced</li>
+          <li>2 tbsp olive oil</li>
+          <li>1 cup cherry tomatoes, halved</li>
+          <li>Big handful baby spinach</li>
+          <li>Red pepper flakes</li>
+          <li>Lemon juice, fresh parsley</li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-semibold mb-2 text-sm">Steps</h5>
+        <ol class="space-y-1 text-sm list-decimal list-inside">
+          <li>Cook pasta. Reserve ½ cup pasta water before draining.</li>
+          <li>Heat olive oil, cook garlic 1 min until fragrant.</li>
+          <li>Add shrimp, cook 2 min per side until pink.</li>
+          <li>Add tomatoes and spinach, cook 2 min.</li>
+          <li>Toss in pasta with splash of pasta water.</li>
+          <li>Finish with lemon juice, pepper flakes, parsley.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- SUNDAY PREP GUIDE -->
+<!-- ════════════════════════════════════════ -->
+<section id="prep">
+  <div class="bg-orange-700 text-white rounded-2xl p-6 mb-8">
+    <h2 class="text-2xl font-bold">📋 Sunday Prep Guide</h2>
+    <p class="text-orange-200 mt-1">~90 minutes to set up Mon–Thu. Put on a podcast and knock it out.</p>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 space-y-6">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">1. Start the Rice (5 min active)</h4>
+          <p class="text-sm text-stone-600">Cook 4 cups brown rice in rice cooker or pot. This covers Mon-Thu lunch bowls + extra for the weekend.</p>
+        </div>
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">2. Cook the Chicken (30 min)</h4>
+          <p class="text-sm text-stone-600">Season 1.5 lbs chicken breast with garlic powder, pepper, oregano, olive oil. Bake at 400°F for 22-25 min. Cool, slice, portion into 4 containers (~6 oz each).</p>
+        </div>
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">3. Roast the Veggies (25 min)</h4>
+          <p class="text-sm text-stone-600">Chop 2 heads broccoli and 3 zucchini. Toss with olive oil, garlic powder, pepper. Roast at 425°F for 20 min. Divide into 4 containers.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">4. Chop Breakfast & Dinner Veggies (15 min)</h4>
+          <p class="text-sm text-stone-600">
+            <strong>Breakfast:</strong> Dice 2 bell peppers, slice 8 oz mushrooms. Store together in one container.<br>
+            <strong>Dinner:</strong> Slice 4 bell peppers and 2 onions. Store together.
+          </p>
+        </div>
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">5. Make the Dressing (5 min)</h4>
+          <p class="text-sm text-stone-600">Lemon-herb dressing: ½ cup olive oil, ¼ cup lemon juice, 2 minced garlic cloves, oregano, basil, pepper. Jar it up.</p>
+        </div>
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">6. Portion Sausages (2 min)</h4>
+          <p class="text-sm text-stone-600">Separate 4 Italian turkey sausage links into individual bags or wrap.</p>
+        </div>
+        <div class="border-l-4 border-orange-400 pl-4">
+          <h4 class="font-bold">7. Make Hummus (optional, 5 min)</h4>
+          <p class="text-sm text-stone-600">Blend: 1 can no-salt-added chickpeas, 2 tbsp tahini, lemon juice, 2 garlic cloves, splash of water. Done.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-orange-50 rounded-lg p-4 text-sm">
+      <strong>🗓️ Fridge Organization:</strong> Label containers Mon/Tue/Wed/Thu or just stack them — same meal, grab any. Chicken + rice + veggies last 4-5 days refrigerated easily.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- SHOPPING LIST -->
+<!-- ════════════════════════════════════════ -->
+<section id="shopping" class="page-break">
+  <div class="bg-sky-700 text-white rounded-2xl p-6 mb-8 no-print">
+    <h2 class="text-2xl font-bold">🛒 Weekly Shopping List</h2>
+    <p class="text-sky-200 mt-1">Quantities for the full week (Mon–Sun). Organized by store section.</p>
+  </div>
+  <div class="print-only mb-4">
+    <h2 class="text-2xl font-bold">🛒 Weekly Shopping List — PKD Meal Plan</h2>
+    <p class="text-sm text-stone-500">Covers Mon–Sun meals, snacks, and prep.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+
+    <!-- Produce -->
+    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5">
+      <h3 class="font-bold text-green-700 mb-3 text-lg">🥬 Produce</h3>
+      <ul class="space-y-1.5 text-sm">
+        <li>☐ Baby spinach — 2 bags (10 oz each)</li>
+        <li>☐ Bell peppers — 6 (mix of colors)</li>
+        <li>☐ Mushrooms — 1 container (16 oz)</li>
+        <li>☐ Broccoli — 2 heads</li>
+        <li>☐ Zucchini — 3</li>
+        <li>☐ Onions — 3 medium</li>
+        <li>☐ Avocados — 6</li>
+        <li>☐ Sweet potato — 1 large</li>
+        <li>☐ Cherry tomatoes — 2 pints</li>
+        <li>☐ Asparagus — 1 bunch</li>
+        <li>☐ Butter lettuce — 1 head</li>
+        <li>☐ Cabbage — 1 small head (or bag of shredded)</li>
+        <li>☐ Carrots — 1 bag (baby carrots work)</li>
+        <li>☐ Celery — 1 bunch</li>
+        <li>☐ Cucumber — 1</li>
+        <li>☐ Green onions — 1 bunch</li>
+        <li>☐ Fresh ginger — 1 small piece</li>
+        <li>☐ Garlic — 2 heads</li>
+        <li>☐ Lemons — 5</li>
+        <li>☐ Limes — 4</li>
+        <li>☐ Bananas — 5</li>
+        <li>☐ Apples — 4</li>
+        <li>☐ Mixed berries — 2 pints (or 1 frozen bag)</li>
+        <li>☐ Fresh herbs: basil, cilantro, parsley, dill (buy what's available)</li>
+      </ul>
+    </div>
+
+    <!-- Meat & Seafood -->
+    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5">
+      <h3 class="font-bold text-red-700 mb-3 text-lg">🥩 Meat & Seafood</h3>
+      <ul class="space-y-1.5 text-sm">
+        <li>☐ Chicken breast — 2.5 lbs (1.5 for batch + 8oz Sat tacos)</li>
+        <li>☐ Italian turkey sausage — 4 links (low sodium if available)</li>
+        <li>☐ Ground turkey — 8 oz</li>
+        <li>☐ Salmon fillet — 6 oz</li>
+        <li>☐ Shrimp (peeled & deveined) — 8 oz</li>
+      </ul>
+
+      <h3 class="font-bold text-amber-700 mb-3 mt-6 text-lg">🥚 Eggs & Dairy Alternatives</h3>
+      <ul class="space-y-1.5 text-sm">
+        <li>☐ Eggs — 2 dozen (18 for Mon-Thu breakfast + extras)</li>
+        <li>☐ Oat milk (unsweetened) — 1 carton</li>
+      </ul>
+
+      <h3 class="font-bold text-amber-800 mb-3 mt-6 text-lg">🥜 Nuts & Butters</h3>
+      <ul class="space-y-1.5 text-sm">
+        <li>☐ Unsalted almond butter — 1 jar</li>
+        <li>☐ Unsalted mixed nuts — 1 bag</li>
+        <li>☐ Tahini — 1 jar (small)</li>
+      </ul>
+    </div>
+
+    <!-- Pantry -->
+    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5">
+      <h3 class="font-bold text-amber-600 mb-3 text-lg">🏪 Pantry & Dry Goods</h3>
+      <ul class="space-y-1.5 text-sm">
+        <li>☐ Brown rice — 1 bag (2 lb)</li>
+        <li>☐ Penne or rotini pasta — 1 box (16 oz)</li>
+        <li>☐ Spaghetti or linguine — 1 box (16 oz)</li>
+        <li>☐ Rolled oats — 1 canister</li>
+        <li>☐ No-salt-added bread — 1 loaf</li>
+        <li>☐ Corn tortillas — 1 pack</li>
+        <li>☐ Chia seeds — 1 bag (small)</li>
+        <li>☐ No-salt-added crushed tomatoes — 2 cans (14 oz)</li>
+        <li>☐ No-salt-added black beans — 1 can (15 oz)</li>
+        <li>☐ No-salt-added chickpeas — 1 can (15 oz)</li>
+        <li>☐ Baking powder — check if you have it</li>
+      </ul>
+    </div>
+
+    <!-- Oils & Condiments -->
+    <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-5">
+      <h3 class="font-bold text-stone-600 mb-3 text-lg">🫒 Oils, Vinegars & Spices</h3>
+      <ul class="space-y-1.5 text-sm">
+        <li>☐ Extra virgin olive oil — 1 bottle (check supply)</li>
+        <li>☐ Coconut oil — small jar</li>
+        <li>☐ Sesame oil — small bottle</li>
+        <li>☐ Rice vinegar — 1 bottle</li>
+        <li>☐ Maple syrup — 1 bottle</li>
+        <li class="pt-2 border-t text-stone-400 italic">Spices (check what you have):</li>
+        <li>☐ Black pepper</li>
+        <li>☐ Garlic powder</li>
+        <li>☐ Italian seasoning</li>
+        <li>☐ Cumin</li>
+        <li>☐ Chili powder</li>
+        <li>☐ Smoked paprika</li>
+        <li>☐ Cinnamon</li>
+        <li>☐ Dried oregano & basil</li>
+        <li>☐ Red pepper flakes</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="mt-6 bg-sky-50 rounded-lg p-4 text-sm">
+    <strong>💡 Shopping Tips:</strong>
+    <ul class="mt-2 space-y-1">
+      <li>• Buy pre-washed baby spinach bags — saves time</li>
+      <li>• Frozen shrimp is fine (and often fresher than "fresh")</li>
+      <li>• Check bread labels — most have 100-150mg sodium per slice. Find the lowest.</li>
+      <li>• ⚠️ <strong>Check ALL labels for soy</strong> — soybean oil hides in bread, sausages, and sauces</li>
+      <li>• This list assumes you already have basic olive oil and common spices. Adjust accordingly.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Water Reminder -->
+<section class="no-print">
+  <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
+    <p class="text-3xl mb-2">💧</p>
+    <p class="text-blue-800 font-bold text-lg">Drink your water.</p>
+    <p class="text-blue-600 text-sm">3+ liters per day. Keep a bottle at your desk. Refill it when it's empty. Repeat.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="no-print text-center text-stone-400 text-xs py-8">
+  Built for Rory · PKD Meal Plan · Updated <script>document.write(new Date().toLocaleDateString())</script>
+</footer>
+
+</body>
+</html>
