@@ -2,640 +2,512 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PKD Meal Plan — Week 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PKD Meals</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<style>
-@media print {
-  .no-print { display: none !important; }
-  .page-break { page-break-before: always; }
-  body { font-size: 11px; }
-  section { break-inside: avoid; }
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiUEtEIE1lYWxzIiwic2hvcnRfbmFtZSI6IlBLRCBNZWFscyIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjZjVmNWYwIiwidGhlbWVfY29sb3IiOiIjMTY2NTM0IiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbCw8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDEwMCAxMDAnPjxyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJyByeD0nMjAnIGZpbGw9JyMxNjY1MzQnLz48dGV4dCB4PSc1MCcgeT0nNjUnIGZvbnQtc2l6ZT0nNTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnPvCfjr08L3RleHQ+PC9zdmc+Iiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifV19">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#166534">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#f0fdf4', 100:'#dcfce7', 200:'#bbf7d0', 300:'#86efac', 400:'#4ade80', 500:'#22c55e', 600:'#16a34a', 700:'#166534', 800:'#14532d', 900:'#052e16' }
+      }
+    }
+  }
 }
-html { scroll-behavior: smooth; }
-.recipe-card { transition: all 0.2s; }
-.recipe-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+</script>
+<style>
+@media print { .no-print{display:none!important} body{font-size:11px} }
+html{scroll-behavior:smooth}
+body{padding-bottom:env(safe-area-inset-bottom,0)}
+.tab-content{display:none;animation:fadeIn .2s ease}
+.tab-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.recipe-card{transition:all .15s}
+.recipe-card:active{transform:scale(0.98)}
+.check-done{text-decoration:line-through;opacity:.5}
 </style>
 </head>
-<body class="bg-stone-50 text-stone-800 min-h-screen">
+<body class="bg-stone-50 text-stone-800 min-h-screen pb-20">
 
-<!-- NAV -->
-<nav class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b border-stone-200 no-print">
-<div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap gap-2 text-sm font-medium">
-  <a href="#rotation" class="text-emerald-700 hover:text-emerald-900">Mon–Thu</a>
-  <span class="text-stone-300">|</span>
-  <a href="#variety" class="text-emerald-700 hover:text-emerald-900">Fri–Sun</a>
-  <span class="text-stone-300">|</span>
-  <a href="#prep" class="text-emerald-700 hover:text-emerald-900">Sunday Prep</a>
-  <span class="text-stone-300">|</span>
-  <a href="#thaw" class="text-emerald-700 hover:text-emerald-900">Thaw Schedule</a>
-  <span class="text-stone-300">|</span>
-  <a href="#inventory" class="text-emerald-700 hover:text-emerald-900">Inventory</a>
-</div>
-</nav>
-
-<div class="max-w-5xl mx-auto px-4 py-8">
-
-<!-- HEADER -->
-<header class="mb-10">
-  <h1 class="text-3xl md:text-4xl font-bold text-stone-900 mb-2">🥬 PKD Meal Plan — Week 1</h1>
-  <p class="text-stone-500 text-lg">Receipt-accurate • No dairy/soy • &lt;2,000mg sodium/day • One person + leftovers</p>
-  <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
-    <strong>⚡ Perishable Priority:</strong> Eat Fresh Made Tray, blueberries, avocados, and fresh herbs (cilantro, basil, dill, parsley) within first 4–5 days. Save canned tuna, rice &amp; tortillas for end of week.
+<!-- Header -->
+<header class="bg-brand-700 text-white px-4 pt-[env(safe-area-inset-top,12px)] pb-3 no-print">
+  <div class="max-w-2xl mx-auto flex items-center justify-between pt-2">
+    <h1 class="text-lg font-bold">🍽️ PKD Meals</h1>
+    <span class="text-xs opacity-75">dairy-free · soy-free · low sodium</span>
   </div>
 </header>
 
-<!-- ===================== MON-THU ROTATION ===================== -->
-<section id="rotation" class="mb-12">
-<h2 class="text-2xl font-bold mb-1 text-emerald-800">📅 Mon–Thu Rotation</h2>
-<p class="text-stone-500 mb-6">Same meals daily. Batch cook Sunday, reheat all week. ~1,450mg sodium/day.</p>
-
-<!-- BREAKFAST -->
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-6 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-4">
-  <h3 class="text-xl font-bold text-stone-900">🍳 Breakfast: Sausage &amp; Egg Scramble w/ Avocado</h3>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~480mg Na</span>
+<!-- Tab Content -->
+<main class="max-w-2xl mx-auto px-4 py-4" id="app">
+  <!-- Recipes Tab -->
+  <div id="tab-recipes" class="tab-content active">
+    <div class="flex gap-2 mb-3 flex-wrap">
+      <input id="recipe-search" type="text" placeholder="Search recipes or ingredients…" class="flex-1 min-w-[200px] px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400">
+      <select id="recipe-filter" class="px-3 py-2 rounded-lg border border-stone-300 text-sm bg-white">
+        <option value="All">All</option>
+        <option value="Breakfast">🍳 Breakfast</option>
+        <option value="Lunch">🥗 Lunch</option>
+        <option value="Dinner">🍖 Dinner</option>
+        <option value="Snack">🥜 Snack</option>
+      </select>
+    </div>
+    <div id="recipe-list"></div>
   </div>
-</div>
-<p class="text-stone-500 text-sm mb-3">Big-eater portion. Cook sausage in bulk Sunday; reheat with fresh eggs daily.</p>
-<div class="grid md:grid-cols-2 gap-4">
-  <div>
-    <h4 class="font-semibold text-sm text-stone-600 mb-2">Ingredients (per day)</h4>
-    <ul class="text-sm space-y-1 text-stone-700">
-      <li>• 4 eggs</li>
-      <li>• 3 country style breakfast sausage links (pre-cooked)</li>
-      <li>• ½ avocado, sliced</li>
-      <li>• Black pepper</li>
-      <li>• Splash of olive oil</li>
-    </ul>
+
+  <!-- Pantry Tab -->
+  <div id="tab-pantry" class="tab-content">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-bold">🥬 My Pantry</h2>
+      <button onclick="clearPantry()" class="text-xs text-red-500 hover:text-red-700">Clear All</button>
+    </div>
+    <div class="flex gap-2 mb-3">
+      <input id="pantry-input" type="text" placeholder="Add custom item…" class="flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm" onkeydown="if(event.key==='Enter')addPantryCustom()">
+      <select id="pantry-loc" class="px-2 py-2 rounded-lg border border-stone-300 text-sm bg-white">
+        <option>🧊 Fridge</option><option>❄️ Freezer</option><option>🏠 Pantry</option><option>🥦 Produce</option>
+      </select>
+      <button onclick="addPantryCustom()" class="bg-brand-600 text-white px-3 py-2 rounded-lg text-sm font-medium">+</button>
+    </div>
+    <!-- Quick add buttons -->
+    <div class="mb-4">
+      <p class="text-xs text-stone-500 mb-1">Quick add:</p>
+      <div id="quick-add-btns" class="flex flex-wrap gap-1"></div>
+    </div>
+    <div id="pantry-list"></div>
   </div>
-  <div>
-    <h4 class="font-semibold text-sm text-stone-600 mb-2">Steps</h4>
-    <ol class="text-sm space-y-1 text-stone-700 list-decimal list-inside">
-      <li>Heat olive oil in pan over medium heat.</li>
-      <li>Reheat pre-cooked sausage links ~2 min per side.</li>
-      <li>Crack 4 eggs into pan, scramble 3–4 min.</li>
-      <li>Plate with sliced avocado. Black pepper to taste.</li>
-    </ol>
+
+  <!-- Shopping Tab -->
+  <div id="tab-shopping" class="tab-content">
+    <h2 class="text-lg font-bold mb-3">🛒 Shopping List</h2>
+    <div class="mb-3 p-3 bg-brand-50 rounded-lg border border-brand-200">
+      <p class="text-sm font-medium mb-2">Select recipes to cook this week:</p>
+      <div id="meal-plan-select" class="flex flex-wrap gap-1 max-h-40 overflow-y-auto"></div>
+      <button onclick="generateShoppingList()" class="mt-2 bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-medium w-full">Generate Smart List</button>
+    </div>
+    <div class="flex gap-2 mb-3">
+      <input id="shop-input" type="text" placeholder="Add item manually…" class="flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm" onkeydown="if(event.key==='Enter')addShopManual()">
+      <button onclick="addShopManual()" class="bg-stone-700 text-white px-3 py-2 rounded-lg text-sm">+</button>
+    </div>
+    <div id="shop-list"></div>
+    <div id="shop-actions" class="hidden mt-3 flex gap-2">
+      <button onclick="copyShopList()" class="flex-1 bg-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium">📋 Copy List</button>
+      <button onclick="addCheckedToPantry()" class="flex-1 bg-brand-600 text-white px-3 py-2 rounded-lg text-sm font-medium">✅ Add to Pantry</button>
+    </div>
   </div>
-</div>
-<p class="text-xs text-stone-400 mt-3">Uses: 16 eggs (Mon–Thu) = full dozen + 4 extra needed — use 3 eggs Mon/Tue, 4 eggs Wed/Thu to stay within dozen. Sausage from country style pack. 2 avocados across 4 days (½ each).</p>
-</div>
 
-<!-- LUNCH -->
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-6 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-4">
-  <h3 class="text-xl font-bold text-stone-900">🥗 Lunch: Chicken Rice Bowl w/ Herbs</h3>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">5 min reheat</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~350mg Na</span>
+  <!-- Sodium Tab -->
+  <div id="tab-sodium" class="tab-content">
+    <h2 class="text-lg font-bold mb-3">📊 Sodium Tracker</h2>
+    <div id="sodium-today" class="mb-4"></div>
+    <div class="mb-4">
+      <p class="text-sm font-medium mb-2">Log a meal:</p>
+      <div id="sodium-recipes" class="flex flex-wrap gap-1 max-h-48 overflow-y-auto"></div>
+    </div>
+    <div>
+      <p class="text-sm font-medium mb-2">Last 7 days:</p>
+      <div id="sodium-history"></div>
+    </div>
   </div>
-</div>
-<p class="text-stone-500 text-sm mb-3">Batch prepped Sunday. Just microwave and top with fresh herbs.</p>
-<div class="grid md:grid-cols-2 gap-4">
-  <div>
-    <h4 class="font-semibold text-sm text-stone-600 mb-2">Ingredients (per serving)</h4>
-    <ul class="text-sm space-y-1 text-stone-700">
-      <li>• ~6 oz chicken breast (sliced, pre-cooked)</li>
-      <li>• 1 cup cooked rice</li>
-      <li>• ½ cup broccoli florets (pre-roasted)</li>
-      <li>• ¼ bell pepper, sliced (pre-roasted)</li>
-      <li>• Fresh cilantro + parsley, chopped</li>
-      <li>• Squeeze of lemon</li>
-      <li>• 1 tbsp olive oil</li>
-      <li>• Black pepper</li>
-    </ul>
+</main>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 no-print z-50" style="padding-bottom:env(safe-area-inset-bottom,0)">
+  <div class="max-w-2xl mx-auto flex">
+    <button onclick="switchTab('recipes')" class="tab-btn flex-1 py-3 text-center text-xs font-medium" data-tab="recipes">
+      <div class="text-xl">📖</div>Recipes
+    </button>
+    <button onclick="switchTab('pantry')" class="tab-btn flex-1 py-3 text-center text-xs font-medium" data-tab="pantry">
+      <div class="text-xl">🥬</div>Pantry
+    </button>
+    <button onclick="switchTab('shopping')" class="tab-btn flex-1 py-3 text-center text-xs font-medium" data-tab="shopping">
+      <div class="text-xl">🛒</div>Shopping
+    </button>
+    <button onclick="switchTab('sodium')" class="tab-btn flex-1 py-3 text-center text-xs font-medium" data-tab="sodium">
+      <div class="text-xl">📊</div>Sodium
+    </button>
   </div>
-  <div>
-    <h4 class="font-semibold text-sm text-stone-600 mb-2">Steps</h4>
-    <ol class="text-sm space-y-1 text-stone-700 list-decimal list-inside">
-      <li>Scoop rice into bowl, top with chicken and veggies.</li>
-      <li>Microwave 2 min until hot.</li>
-      <li>Top with fresh cilantro, parsley, lemon squeeze.</li>
-      <li>Drizzle olive oil, pepper.</li>
-    </ol>
-  </div>
-</div>
-<p class="text-xs text-stone-400 mt-3">Uses: ~1.5 lb chicken breast (4 servings), broccoli head, 1 bell pepper pack, cilantro, parsley, 1 lemon, rice.</p>
-</div>
+</nav>
 
-<!-- DINNER -->
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-6 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-4">
-  <h3 class="text-xl font-bold text-stone-900">🍠 Dinner: Roasted Sweet Potato &amp; Chicken w/ Asparagus</h3>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">5 min reheat</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~300mg Na</span>
-  </div>
-</div>
-<p class="text-stone-500 text-sm mb-3">Hearty plate meal. All batch-cooked Sunday.</p>
-<div class="grid md:grid-cols-2 gap-4">
-  <div>
-    <h4 class="font-semibold text-sm text-stone-600 mb-2">Ingredients (per serving)</h4>
-    <ul class="text-sm space-y-1 text-stone-700">
-      <li>• ~5 oz chicken breast (pre-cooked, different seasoning)</li>
-      <li>• 1 medium sweet potato, cubed &amp; roasted</li>
-      <li>• 4–5 asparagus spears, roasted</li>
-      <li>• Fresh rosemary (on chicken)</li>
-      <li>• 1 tbsp olive oil</li>
-      <li>• Black pepper</li>
-      <li>• Squeeze of lemon</li>
-    </ul>
-  </div>
-  <div>
-    <h4 class="font-semibold text-sm text-stone-600 mb-2">Steps</h4>
-    <ol class="text-sm space-y-1 text-stone-700 list-decimal list-inside">
-      <li>Plate chicken, sweet potato cubes, asparagus.</li>
-      <li>Microwave 2–3 min.</li>
-      <li>Squeeze lemon, drizzle olive oil.</li>
-      <li>Garnish with fresh rosemary.</li>
-    </ol>
-  </div>
-</div>
-<p class="text-xs text-stone-400 mt-3">Uses: remaining ~1 lb chicken, all sweet potatoes (~2.2 lb for 4 servings), all asparagus, rosemary, 1 lemon.</p>
-</div>
+<script>
+// ============ RECIPE DATA ============
+const recipes = [
+  // BREAKFAST
+  {id:1,name:"Southwest Scramble",category:"Breakfast",time:"15 min",sodium:280,servings:2,
+    ingredients:["4 large eggs","1 tbsp olive oil","1/2 red bell pepper, diced","1/4 red onion, diced","1/2 cup black beans (no-salt-added), rinsed","1/2 avocado, sliced","1/4 tsp cumin","1/4 tsp smoked paprika","Black pepper to taste","Fresh cilantro"],
+    steps:["Heat olive oil in skillet over medium heat.","Sauté bell pepper and onion 3-4 min until soft.","Add black beans, cumin, paprika. Stir 1 min.","Push veggies to side, scramble eggs in open space.","Combine, top with avocado and cilantro."]},
+  {id:2,name:"Turkey Sausage & Egg Wrap",category:"Breakfast",time:"15 min",sodium:350,servings:1,
+    ingredients:["2 turkey sausage patties (low-sodium)","2 large eggs","1 flour tortilla (low-sodium)","1/4 avocado, mashed","Handful baby spinach","1 tsp olive oil","Black pepper"],
+    steps:["Cook sausage patties in skillet per package directions. Slice.","Scramble eggs in olive oil, season with pepper.","Warm tortilla 15 sec in microwave.","Spread mashed avocado on tortilla.","Layer spinach, eggs, sausage. Roll up."]},
+  {id:3,name:"Veggie Hash with Eggs",category:"Breakfast",time:"20 min",sodium:190,servings:2,
+    ingredients:["2 medium potatoes, diced small","1 tbsp olive oil","1/2 zucchini, diced","1/2 red bell pepper, diced","1/4 onion, diced","2 cloves garlic, minced","4 eggs","1/4 tsp paprika","Black pepper","Fresh parsley"],
+    steps:["Heat olive oil in large skillet over medium-high.","Add potatoes, cook 8-10 min stirring occasionally until golden.","Add zucchini, bell pepper, onion. Cook 4 min.","Add garlic, paprika, pepper. Stir 1 min.","Make 4 wells, crack eggs in. Cover, cook 4-5 min until whites set.","Top with parsley."]},
+  {id:4,name:"Banana Oat Pancakes",category:"Breakfast",time:"15 min",sodium:120,servings:2,
+    ingredients:["1 cup rolled oats","2 ripe bananas","2 eggs","1/2 tsp cinnamon","1/2 tsp vanilla extract","1 tbsp olive oil","Maple syrup for serving","Fresh berries"],
+    steps:["Blend oats, bananas, eggs, cinnamon, vanilla until smooth.","Heat olive oil in skillet over medium.","Pour 1/4 cup batter per pancake.","Cook 2-3 min per side until golden.","Serve with maple syrup and berries."]},
+  {id:5,name:"Loaded Avocado Toast",category:"Breakfast",time:"10 min",sodium:210,servings:1,
+    ingredients:["2 slices low-sodium bread, toasted","1 ripe avocado","2 eggs","1 tsp olive oil","Cherry tomatoes, halved","Red pepper flakes","Black pepper","Squeeze of lemon"],
+    steps:["Toast bread to preference.","Mash avocado with lemon juice and pepper.","Fry or poach eggs in olive oil.","Spread avocado on toast, top with eggs.","Add tomatoes and red pepper flakes."]},
 
-<!-- SNACKS -->
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-6 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-4">
-  <h3 class="text-xl font-bold text-stone-900">🫐 Snacks (daily)</h3>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~320mg Na</span>
-  </div>
-</div>
-<ul class="text-sm space-y-1 text-stone-700">
-  <li>• <strong>Morning:</strong> Banana + handful of nut/seed mix</li>
-  <li>• <strong>Afternoon:</strong> Fresh Made Tray items + 2 tbsp hummus + blueberries</li>
-  <li>• <strong>Evening:</strong> Apple slices + walnuts</li>
-</ul>
-<p class="text-xs text-stone-400 mt-3">Fresh Made Tray &amp; blueberries first 3–4 days. Switch to cucumber + hummus after tray is gone.</p>
-</div>
+  // LUNCH
+  {id:6,name:"Mediterranean Chicken Bowl",category:"Lunch",time:"20 min",sodium:320,servings:2,
+    ingredients:["2 chicken breasts, sliced thin","1 cup cooked rice","1 cucumber, diced","1 cup cherry tomatoes, halved","1/4 red onion, sliced thin","1/3 cup Kalamata olives, halved","2 tbsp olive oil","1 tbsp lemon juice","1 tsp dried oregano","Black pepper","Fresh parsley"],
+    steps:["Season chicken with oregano and pepper.","Heat 1 tbsp olive oil, cook chicken 5-6 min per side.","Whisk remaining olive oil with lemon juice.","Build bowls: rice, chicken, cucumber, tomatoes, onion, olives.","Drizzle with lemon-oil dressing. Add parsley."]},
+  {id:7,name:"Black Bean & Rice Bowl",category:"Lunch",time:"15 min",sodium:180,servings:2,
+    ingredients:["1 can no-salt-added black beans, drained","1.5 cups cooked rice","1 avocado, diced","1/2 cup corn (frozen, thawed)","Handful cherry tomatoes, quartered","2 green onions, sliced","Juice of 1 lime","1 tbsp olive oil","1/4 tsp cumin","Fresh cilantro"],
+    steps:["Warm beans with cumin in small pot.","Build bowls: rice, beans, corn, avocado, tomatoes.","Drizzle with lime juice and olive oil.","Top with green onions and cilantro."]},
+  {id:8,name:"Chicken Lettuce Wraps",category:"Lunch",time:"15 min",sodium:290,servings:2,
+    ingredients:["1 lb ground chicken","1 tbsp olive oil","3 cloves garlic, minced","1 tbsp rice vinegar","1 tbsp coconut aminos","1 tsp sesame oil (from sesame seeds, soy-free)","1/2 cup water chestnuts, diced","3 green onions, sliced","Butter lettuce leaves","Sriracha (optional)"],
+    steps:["Heat olive oil over medium-high. Brown chicken, break into crumbles.","Add garlic, cook 1 min.","Add rice vinegar, coconut aminos, sesame oil. Stir.","Add water chestnuts, cook 2 min.","Spoon into lettuce cups, top with green onions."]},
+  {id:9,name:"Tuna Salad Stuffed Peppers",category:"Lunch",time:"10 min",sodium:250,servings:2,
+    ingredients:["2 cans low-sodium tuna, drained","2 large bell peppers, halved & seeded","1/4 cup olive oil mayo (soy-free)","1 stalk celery, diced","2 tbsp red onion, minced","1 tbsp lemon juice","Black pepper","Paprika"],
+    steps:["Mix tuna, mayo, celery, onion, lemon juice, pepper.","Stuff into bell pepper halves.","Sprinkle with paprika.","Serve immediately or chill 30 min."]},
+  {id:10,name:"Veggie & Hummus Wrap",category:"Lunch",time:"10 min",sodium:310,servings:1,
+    ingredients:["1 large flour tortilla (low-sodium)","3 tbsp hummus (soy-free)","1/4 cucumber, sliced thin","1/4 cup shredded carrot","Handful baby spinach","1/4 avocado, sliced","Sprouts (optional)","Black pepper"],
+    steps:["Spread hummus across tortilla.","Layer cucumber, carrot, spinach, avocado.","Add sprouts if using. Season with pepper.","Roll tightly, cut in half."]},
 
-<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-sm text-emerald-800 mb-6">
-  <strong>📊 Daily Total (Mon–Thu):</strong> ~1,450mg sodium. Well under 2,000mg limit.
-</div>
-</section>
+  // DINNER
+  {id:11,name:"Lemon Herb Chicken with Roasted Vegetables",category:"Dinner",time:"30 min",sodium:290,servings:2,
+    ingredients:["2 chicken breasts","2 tbsp olive oil","Juice of 1 lemon","3 cloves garlic, minced","1 tsp dried thyme","1 tsp dried rosemary","2 cups broccoli florets","1 large zucchini, sliced","1 red bell pepper, chunked","Black pepper"],
+    steps:["Preheat oven to 425°F.","Marinate chicken in 1 tbsp olive oil, lemon, garlic, herbs, pepper.","Toss veggies with remaining olive oil and pepper on sheet pan.","Place chicken on pan with veggies.","Roast 22-25 min until chicken reaches 165°F."]},
+  {id:12,name:"Garlic Shrimp with Pasta",category:"Dinner",time:"20 min",sodium:340,servings:2,
+    ingredients:["1 lb shrimp, peeled & deveined","8 oz pasta (penne or linguine)","3 tbsp olive oil","5 cloves garlic, sliced","1/4 tsp red pepper flakes","Juice of 1 lemon","1/4 cup fresh parsley, chopped","Black pepper","Zest of 1 lemon"],
+    steps:["Cook pasta per package. Reserve 1/2 cup pasta water. Drain.","Heat olive oil, sauté garlic and red pepper flakes 1 min.","Add shrimp, cook 2-3 min per side until pink.","Add lemon juice, pasta, splash of pasta water. Toss.","Top with parsley and lemon zest."]},
+  {id:13,name:"Beef Stir-Fry with Rice",category:"Dinner",time:"20 min",sodium:380,servings:2,
+    ingredients:["12 oz flank steak, sliced thin against grain","2 tbsp coconut aminos","1 tbsp rice vinegar","1 tsp sesame oil (soy-free)","1 tbsp olive oil","1 cup broccoli florets","1 red bell pepper, sliced","1 cup snap peas","3 cloves garlic, minced","1 tsp fresh ginger, grated","Cooked rice"],
+    steps:["Mix coconut aminos, rice vinegar, sesame oil in bowl.","Heat olive oil in wok/skillet over high heat.","Sear beef 2 min, remove and set aside.","Stir-fry broccoli, pepper, snap peas 3-4 min.","Add garlic, ginger, cook 30 sec.","Return beef with sauce, toss 1 min.","Serve over rice."]},
+  {id:14,name:"Baked Salmon with Sweet Potato",category:"Dinner",time:"25 min",sodium:260,servings:2,
+    ingredients:["2 salmon fillets (6 oz each)","2 medium sweet potatoes, cubed","2 tbsp olive oil","1 tbsp maple syrup","1 tsp Dijon mustard","1 tbsp lemon juice","1/2 tsp garlic powder","Black pepper","4 cups mixed greens","Lemon wedges"],
+    steps:["Preheat oven to 400°F.","Toss sweet potatoes with 1 tbsp olive oil, pepper. Spread on pan.","Roast sweet potatoes 10 min.","Mix maple syrup, mustard, lemon juice. Brush on salmon.","Add salmon to pan. Roast 12-15 min more.","Serve with greens and lemon wedges."]},
+  {id:15,name:"One-Pot Chicken & Rice",category:"Dinner",time:"30 min",sodium:310,servings:4,
+    ingredients:["4 chicken thighs, boneless skinless","1.5 cups long grain rice","3 cups low-sodium chicken broth","1 tbsp olive oil","1 onion, diced","3 cloves garlic, minced","1 cup frozen peas","1 tsp turmeric","1/2 tsp cumin","Black pepper","Fresh lemon juice"],
+    steps:["Season chicken with turmeric, cumin, pepper.","Heat olive oil, sear chicken 3 min per side. Remove.","Sauté onion 3 min, add garlic 1 min.","Add rice, stir 1 min. Add broth, bring to boil.","Nestle chicken in, cover, reduce to low. Cook 18 min.","Add peas last 3 min. Fluff rice, squeeze lemon."]},
+  {id:16,name:"Stuffed Bell Peppers",category:"Dinner",time:"30 min",sodium:270,servings:4,
+    ingredients:["4 large bell peppers, tops cut & seeded","1 lb ground turkey","1 cup cooked rice","1 can no-salt-added diced tomatoes","1/2 onion, diced","2 cloves garlic, minced","1 tsp Italian seasoning","1 tbsp olive oil","Black pepper","Fresh basil"],
+    steps:["Preheat oven to 375°F.","Brown turkey with onion and garlic in olive oil.","Mix in rice, tomatoes, Italian seasoning, pepper.","Stuff peppers, place in baking dish.","Pour a little water in bottom of dish. Cover with foil.","Bake 25 min. Top with fresh basil."]},
 
-<!-- ===================== FRI-SUN VARIETY ===================== -->
-<section id="variety" class="mb-12 page-break">
-<h2 class="text-2xl font-bold mb-1 text-purple-800">🎯 Fri–Sun Variety Days</h2>
-<p class="text-stone-500 mb-6">Different meals each day using remaining ingredients. Thaw proteins as scheduled.</p>
+  // SNACKS
+  {id:17,name:"Apple & Almond Butter",category:"Snack",time:"5 min",sodium:5,servings:1,
+    ingredients:["1 large apple, sliced","2 tbsp almond butter","Cinnamon (optional)","Drizzle of honey (optional)"],
+    steps:["Slice apple.","Serve with almond butter for dipping.","Sprinkle cinnamon or drizzle honey if desired."]},
+  {id:18,name:"Trail Mix",category:"Snack",time:"5 min",sodium:10,servings:4,
+    ingredients:["1 cup unsalted almonds","1/2 cup unsalted cashews","1/2 cup dried cranberries","1/4 cup unsalted sunflower seeds","1/4 cup dark chocolate chips (dairy-free, soy-free)"],
+    steps:["Combine all ingredients in bowl.","Divide into portions. Store in airtight container."]},
+  {id:19,name:"Veggies & Hummus",category:"Snack",time:"5 min",sodium:160,servings:1,
+    ingredients:["1/3 cup hummus (soy-free)","Carrot sticks","Cucumber slices","Bell pepper strips","Cherry tomatoes"],
+    steps:["Wash and cut vegetables.","Serve with hummus for dipping."]},
+  {id:20,name:"Frozen Banana Bites",category:"Snack",time:"10 min + freeze",sodium:2,servings:4,
+    ingredients:["3 bananas, sliced into rounds","1/2 cup almond butter","1/2 cup dairy-free dark chocolate chips","1 tbsp coconut oil"],
+    steps:["Spread almond butter between two banana slices to make sandwiches.","Place on parchment-lined tray, freeze 1 hour.","Melt chocolate with coconut oil.","Dip frozen bites halfway in chocolate.","Freeze another 30 min. Store in freezer bag."]}
+];
 
-<!-- FRIDAY -->
-<div class="mb-8">
-<h3 class="text-lg font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">🟣 Friday — Shrimp Day</h3>
+// ============ QUICK ADD ITEMS ============
+const quickAddItems = {
+  "🧊 Fridge": ["Eggs","Chicken breast","Ground turkey","Shrimp","Salmon","Almond butter","Hummus","Tortillas","Coconut aminos"],
+  "❄️ Freezer": ["Frozen peas","Frozen corn","Frozen berries","Turkey sausage","Frozen shrimp"],
+  "🏠 Pantry": ["Rice","Pasta","Oats","Black beans (no salt)","Olive oil","Coconut oil","Maple syrup","Honey","Low-sodium broth","Diced tomatoes (no salt)","Flour tortillas"],
+  "🥦 Produce": ["Avocados","Bananas","Lemons","Bell peppers","Onions","Garlic","Zucchini","Broccoli","Sweet potatoes","Potatoes","Baby spinach","Cucumber","Cherry tomatoes","Cilantro","Parsley","Apples","Carrots"]
+};
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🍳 Breakfast: Apple Maple Sausage Links + Eggs</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~500mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• 3 apple maple breakfast links</li>
-      <li>• 3 eggs, scrambled</li>
-      <li>• ½ avocado (last one)</li>
-      <li>• Black pepper</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Cook links in pan from frozen, 8 min turning often.</li>
-      <li>Scramble eggs in same pan.</li>
-      <li>Plate with avocado.</li>
-    </ol>
-  </div>
-</div>
-</div>
+// ============ STORE SECTIONS MAPPING ============
+const storeSections = {
+  "Produce":["avocado","banana","lemon","lime","bell pepper","onion","garlic","zucchini","broccoli","sweet potato","potato","spinach","baby spinach","cucumber","cherry tomato","tomato","cilantro","parsley","apple","carrot","lettuce","snap pea","green onion","celery","sprout","ginger","berries","cranberries"],
+  "Meat & Seafood":["chicken","turkey","beef","steak","shrimp","salmon","tuna","sausage"],
+  "Dairy-Free":["almond butter","coconut oil","chocolate chip","dark chocolate","maple syrup","honey"],
+  "Pantry & Canned":["rice","pasta","oat","black bean","olive oil","broth","diced tomato","tortilla","coconut aminos","rice vinegar","sesame oil","hummus","water chestnut","Dijon mustard","vinegar","flour","baking"],
+  "Grains & Bread":["bread","wrap","pita","oats","rolled oats"]
+};
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🥙 Lunch: Tuna Salad Lettuce Wraps</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~400mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• 1 can Starkist tuna, drained</li>
-      <li>• ¼ red onion, diced fine</li>
-      <li>• ½ cucumber, diced</li>
-      <li>• Fresh dill, chopped</li>
-      <li>• 1 tbsp olive oil + lemon juice</li>
-      <li>• Romaine hearts leaves (as wraps)</li>
-      <li>• Grape tomatoes, halved</li>
-      <li>• Black pepper</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Drain tuna into bowl.</li>
-      <li>Mix with onion, cucumber, dill, olive oil, lemon.</li>
-      <li>Spoon into romaine leaves.</li>
-      <li>Top with grape tomatoes.</li>
-    </ol>
-  </div>
-</div>
-</div>
+// ============ STATE ============
+let pantry = JSON.parse(localStorage.getItem('pkd-pantry')||'[]');
+let shopList = JSON.parse(localStorage.getItem('pkd-shop')||'[]');
+let sodiumLog = JSON.parse(localStorage.getItem('pkd-sodium')||'{}');
+let selectedMeals = new Set();
+let expandedRecipe = null;
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🍤 Dinner: Garlic Lemon Shrimp w/ Rice &amp; Cauliflower</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">20 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~450mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• ½ lb jumbo shrimp (thawed)</li>
-      <li>• 3 cloves garlic, minced</li>
-      <li>• 1 tbsp olive oil</li>
-      <li>• Juice of ½ lemon</li>
-      <li>• Fresh basil, torn</li>
-      <li>• 1 cup cooked rice</li>
-      <li>• ½ cauliflower, cut into florets &amp; roasted</li>
-      <li>• Black pepper</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Roast cauliflower: 425°F, 20 min with olive oil + pepper.</li>
-      <li>Heat olive oil, sauté garlic 30 sec.</li>
-      <li>Add shrimp, cook 2–3 min per side until pink.</li>
-      <li>Squeeze lemon, toss with basil.</li>
-      <li>Serve over rice with cauliflower.</li>
-    </ol>
-  </div>
-</div>
-<p class="text-xs text-stone-400 mt-2">Save remaining shrimp for Saturday.</p>
-</div>
-</div>
+// ============ TAB SWITCHING ============
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.toggle('text-brand-700',b.dataset.tab===tab);
+    b.classList.toggle('text-stone-400',b.dataset.tab!==tab);
+  });
+  if(tab==='pantry') renderPantry();
+  if(tab==='shopping') renderShop();
+  if(tab==='sodium') renderSodium();
+  if(tab==='recipes') renderRecipes();
+}
 
-<!-- SATURDAY -->
-<div class="mb-8">
-<h3 class="text-lg font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">🟣 Saturday — Beef &amp; Turkey Day</h3>
+// ============ RECIPES ============
+function renderRecipes() {
+  const q = document.getElementById('recipe-search').value.toLowerCase();
+  const cat = document.getElementById('recipe-filter').value;
+  const filtered = recipes.filter(r => {
+    if(cat!=='All' && r.category!==cat) return false;
+    if(q && !r.name.toLowerCase().includes(q) && !r.ingredients.some(i=>i.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  const icons = {Breakfast:'🍳',Lunch:'🥗',Dinner:'🍖',Snack:'🥜'};
+  document.getElementById('recipe-list').innerHTML = filtered.map(r=>`
+    <div class="recipe-card bg-white rounded-xl shadow-sm border border-stone-200 mb-3 overflow-hidden">
+      <div class="p-4 cursor-pointer" onclick="toggleRecipe(${r.id})">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-brand-100 text-brand-700">${icons[r.category]} ${r.category}</span>
+            <h3 class="text-base font-bold mt-1">${r.name}</h3>
+          </div>
+          <div class="text-right text-xs text-stone-500">
+            <div>⏱ ${r.time}</div>
+            <div>🧂 ${r.sodium}mg</div>
+            <div>👤 ${r.servings} serving${r.servings>1?'s':''}</div>
+          </div>
+        </div>
+      </div>
+      <div id="recipe-detail-${r.id}" class="${expandedRecipe===r.id?'':'hidden'} border-t border-stone-100 p-4 bg-stone-50">
+        <div class="mb-3">
+          <h4 class="font-semibold text-sm mb-1">Ingredients</h4>
+          <ul class="text-sm space-y-0.5">${r.ingredients.map(i=>`<li class="flex items-start gap-1"><span class="text-brand-500 mt-0.5">•</span>${i}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-1">Instructions</h4>
+          <ol class="text-sm space-y-1">${r.steps.map((s,i)=>`<li><span class="font-bold text-brand-600">${i+1}.</span> ${s}</li>`).join('')}</ol>
+        </div>
+      </div>
+    </div>
+  `).join('') || '<p class="text-center text-stone-400 py-8">No recipes found</p>';
+}
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🍳 Breakfast: Smoked Turkey &amp; Egg Tortilla Wrap</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~550mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• 2 La Bendita tortillas</li>
-      <li>• 3–4 oz smoked turkey, sliced</li>
-      <li>• 2 eggs, scrambled</li>
-      <li>• Mustard (smear)</li>
-      <li>• Handful grape tomatoes, halved</li>
-      <li>• Black pepper</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Warm tortillas in dry pan 30 sec each side.</li>
-      <li>Scramble eggs.</li>
-      <li>Layer turkey, eggs, mustard, tomatoes.</li>
-      <li>Wrap and eat.</li>
-    </ol>
-  </div>
-</div>
-</div>
+function toggleRecipe(id) {
+  expandedRecipe = expandedRecipe===id ? null : id;
+  renderRecipes();
+}
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🥗 Lunch: Shrimp &amp; Avocado... wait, no avocado left. Mediterranean Plate</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~400mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• Remaining shrimp, cold or quick-sautéed</li>
-      <li>• Hummus (2–3 tbsp)</li>
-      <li>• Kalamata olives (small handful)</li>
-      <li>• Cucumber, sliced</li>
-      <li>• Grape tomatoes</li>
-      <li>• 1 tortilla, cut into wedges &amp; toasted</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Arrange everything on a plate mezze-style.</li>
-      <li>Toast tortilla wedges in dry pan or oven.</li>
-      <li>Dip and eat.</li>
-    </ol>
-  </div>
-</div>
-</div>
+// ============ PANTRY ============
+function renderPantry() {
+  const locs = ["🧊 Fridge","❄️ Freezer","🏠 Pantry","🥦 Produce"];
+  const now = Date.now();
+  // Quick add buttons
+  const loc = document.getElementById('pantry-loc').value;
+  const items = quickAddItems[loc]||[];
+  document.getElementById('quick-add-btns').innerHTML = items.map(i=>
+    `<button onclick="addPantryItem('${i}','${loc}')" class="text-xs px-2 py-1 rounded-full bg-brand-100 text-brand-700 hover:bg-brand-200">${i}</button>`
+  ).join('');
+  // Pantry list
+  let html = '';
+  for(const l of locs) {
+    const items = pantry.filter(p=>p.loc===l);
+    if(!items.length) continue;
+    html += `<div class="mb-4"><h3 class="font-semibold text-sm mb-1">${l}</h3>`;
+    html += items.map(p=>{
+      const age = (now - p.added)/(1000*60*60*24);
+      const expireWarn = (l==='🥦 Produce' && age>5) || (l==='🧊 Fridge' && ['chicken','turkey','beef','steak','shrimp','salmon','ground'].some(m=>p.name.toLowerCase().includes(m)) && age>3);
+      return `<div class="flex items-center justify-between py-1.5 px-2 rounded ${expireWarn?'bg-amber-50 border border-amber-200':''}">
+        <span class="text-sm ${expireWarn?'text-amber-700':''}">${expireWarn?'⚠️ ':'' }${p.name} <span class="text-xs text-stone-400">${Math.floor(age)}d ago</span></span>
+        <button onclick="removePantryItem('${p.id}')" class="text-red-400 hover:text-red-600 text-lg leading-none">&times;</button>
+      </div>`;
+    }).join('');
+    html += '</div>';
+  }
+  document.getElementById('pantry-list').innerHTML = html || '<p class="text-center text-stone-400 py-4">Pantry is empty. Add some items!</p>';
+}
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🥩 Dinner: Beef Stir Fry w/ Bell Peppers &amp; Rice</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">15 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~400mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• ~0.75 lb beef stir fry (thawed)</li>
-      <li>• 1 bell pepper, sliced</li>
-      <li>• ¼ yellow onion, sliced</li>
-      <li>• 2 cloves garlic, minced</li>
-      <li>• 1 tsp fresh ginger, grated</li>
-      <li>• 1 tbsp olive oil</li>
-      <li>• Black pepper</li>
-      <li>• 1 cup cooked rice</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Heat olive oil in large pan/wok, high heat.</li>
-      <li>Sear beef 2–3 min, set aside.</li>
-      <li>Sauté peppers, onion, garlic, ginger 3–4 min.</li>
-      <li>Return beef, toss together 1 min.</li>
-      <li>Serve over rice.</li>
-    </ol>
-  </div>
-</div>
-<p class="text-xs text-stone-400 mt-2">This uses the entire beef stir fry pack. Enough for 1 big serving + leftovers for Sunday lunch.</p>
-</div>
-</div>
+function addPantryItem(name, loc) {
+  pantry.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, loc, added:Date.now()});
+  savePantry(); renderPantry();
+}
+function addPantryCustom() {
+  const inp = document.getElementById('pantry-input');
+  const name = inp.value.trim();
+  if(!name) return;
+  addPantryItem(name, document.getElementById('pantry-loc').value);
+  inp.value='';
+}
+function removePantryItem(id) {
+  pantry = pantry.filter(p=>p.id!==id);
+  savePantry(); renderPantry();
+}
+function clearPantry() {
+  if(!confirm('Clear your entire pantry?')) return;
+  pantry=[]; savePantry(); renderPantry();
+}
+function savePantry() { localStorage.setItem('pkd-pantry',JSON.stringify(pantry)); }
 
-<!-- SUNDAY -->
-<div class="mb-8">
-<h3 class="text-lg font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">🟣 Sunday — Clean Out &amp; Prep Day</h3>
+document.getElementById('pantry-loc').addEventListener('change', renderPantry);
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🍳 Breakfast: Apple Maple Sausage + Eggs (again)</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~500mg Na</span>
-  </div>
-</div>
-<div class="text-sm text-stone-700">
-  <p>Same as Friday breakfast — remaining apple maple links + last eggs. Use any remaining herbs as garnish.</p>
-</div>
-</div>
+// ============ SHOPPING LIST ============
+function renderMealPlanSelect() {
+  document.getElementById('meal-plan-select').innerHTML = recipes.map(r=>
+    `<button onclick="toggleMealSelect(${r.id})" class="text-xs px-2 py-1 rounded-full border ${selectedMeals.has(r.id)?'bg-brand-600 text-white border-brand-600':'bg-white text-stone-600 border-stone-300'}">${r.name}</button>`
+  ).join('');
+}
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🥙 Lunch: Tuna &amp; Turkey Tortilla Wraps</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">10 min</span>
-    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">~500mg Na</span>
-  </div>
-</div>
-<div class="grid md:grid-cols-2 gap-4 text-sm text-stone-700">
-  <div>
-    <ul class="space-y-1">
-      <li>• 1 can Starkist tuna</li>
-      <li>• Remaining smoked turkey</li>
-      <li>• 2 tortillas</li>
-      <li>• Romaine lettuce</li>
-      <li>• Remaining tomatoes, sliced</li>
-      <li>• Mustard</li>
-      <li>• Remaining cucumber</li>
-    </ul>
-  </div>
-  <div>
-    <ol class="list-decimal list-inside space-y-1">
-      <li>Make 2 wraps: one tuna, one turkey.</li>
-      <li>Layer lettuce, tomato, cucumber, mustard.</li>
-      <li>Wrap tight, eat up.</li>
-    </ol>
-  </div>
-</div>
-</div>
+function toggleMealSelect(id) {
+  selectedMeals.has(id) ? selectedMeals.delete(id) : selectedMeals.add(id);
+  renderMealPlanSelect();
+}
 
-<div class="recipe-card bg-white rounded-xl shadow p-6 mb-4 border border-stone-100">
-<div class="flex items-start justify-between flex-wrap gap-2 mb-3">
-  <h4 class="text-lg font-bold">🍽️ Dinner: Use leftover beef stir fry + remaining rice</h4>
-  <div class="flex gap-2 text-xs">
-    <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">5 min reheat</span>
-  </div>
-</div>
-<div class="text-sm text-stone-700">
-  <p>Reheat Saturday's beef stir fry leftovers over rice. Add any remaining veggies. Then start <a href="#prep" class="text-emerald-700 underline">Week 2 Sunday Prep</a> for the following week.</p>
-</div>
-</div>
-</div>
+function generateShoppingList() {
+  const pantryNames = pantry.map(p=>p.name.toLowerCase());
+  let needed = [];
+  for(const id of selectedMeals) {
+    const r = recipes.find(x=>x.id===id);
+    if(!r) continue;
+    for(const ing of r.ingredients) {
+      // Check if something similar is in pantry
+      const ingLower = ing.toLowerCase();
+      const inPantry = pantryNames.some(p => ingLower.includes(p.toLowerCase()) || p.toLowerCase().includes(ingLower.split(',')[0].replace(/[\d\/\s]+(?:tbsp|tsp|cup|oz|lb|can|large|medium|small|clove|head|bunch|handful|squeeze|drizzle|splash)/gi,'').trim()));
+      if(!inPantry) {
+        // Determine store section
+        let section = 'Other';
+        for(const [sec,keywords] of Object.entries(storeSections)) {
+          if(keywords.some(k=>ingLower.includes(k))) { section=sec; break; }
+        }
+        if(!needed.some(n=>n.text===ing)) {
+          needed.push({text:ing, section, checked:false, id:Date.now().toString(36)+Math.random().toString(36).slice(2,6)});
+        }
+      }
+    }
+  }
+  shopList = [...needed, ...shopList.filter(s=>s.manual)];
+  saveShop(); renderShop();
+}
 
-</section>
+function renderShop() {
+  renderMealPlanSelect();
+  const sections = {};
+  for(const item of shopList) {
+    const s = item.section||'Other';
+    if(!sections[s]) sections[s]=[];
+    sections[s].push(item);
+  }
+  // Sort: unchecked first
+  let html = '';
+  for(const [sec,items] of Object.entries(sections)) {
+    const sorted = [...items.filter(i=>!i.checked),...items.filter(i=>i.checked)];
+    html += `<div class="mb-3"><h3 class="font-semibold text-sm mb-1">${sec}</h3>`;
+    html += sorted.map(item=>
+      `<div class="flex items-center gap-2 py-1.5 px-2 rounded ${item.checked?'check-done':''}">
+        <input type="checkbox" ${item.checked?'checked':''} onchange="toggleShopItem('${item.id}')" class="w-4 h-4 accent-brand-600">
+        <span class="text-sm flex-1">${item.text}</span>
+        <button onclick="removeShopItem('${item.id}')" class="text-red-400 hover:text-red-600 text-lg leading-none">&times;</button>
+      </div>`
+    ).join('');
+    html += '</div>';
+  }
+  document.getElementById('shop-list').innerHTML = html || '<p class="text-center text-stone-400 py-4">No items yet. Select recipes or add manually.</p>';
+  document.getElementById('shop-actions').classList.toggle('hidden', shopList.length===0);
+}
 
-<!-- ===================== SUNDAY PREP ===================== -->
-<section id="prep" class="mb-12 page-break">
-<h2 class="text-2xl font-bold mb-1 text-blue-800">🔪 Sunday Prep Guide (for Mon–Thu)</h2>
-<p class="text-stone-500 mb-6">~90 minutes total. Do this the Sunday before the week starts.</p>
+function toggleShopItem(id) {
+  const item = shopList.find(i=>i.id===id);
+  if(item) item.checked=!item.checked;
+  saveShop(); renderShop();
+}
+function removeShopItem(id) {
+  shopList = shopList.filter(i=>i.id!==id);
+  saveShop(); renderShop();
+}
+function addShopManual() {
+  const inp = document.getElementById('shop-input');
+  const text = inp.value.trim();
+  if(!text) return;
+  shopList.push({text, section:'Other', checked:false, manual:true, id:Date.now().toString(36)+Math.random().toString(36).slice(2,6)});
+  inp.value=''; saveShop(); renderShop();
+}
+function copyShopList() {
+  const unchecked = shopList.filter(i=>!i.checked);
+  const text = unchecked.map(i=>`☐ ${i.text}`).join('\n');
+  navigator.clipboard.writeText(text||'Nothing on the list!').then(()=>alert('Copied to clipboard!'));
+}
+function addCheckedToPantry() {
+  const checked = shopList.filter(i=>i.checked);
+  for(const item of checked) {
+    // Guess pantry location
+    const t = item.text.toLowerCase();
+    let loc = '🏠 Pantry';
+    if(storeSections['Produce'].some(k=>t.includes(k))) loc='🥦 Produce';
+    else if(storeSections['Meat & Seafood'].some(k=>t.includes(k))) loc='🧊 Fridge';
+    pantry.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6), name:item.text.split(',')[0].replace(/[\d\/]+\s*(tbsp|tsp|cup|oz|lb|can|cans)\s*/gi,'').trim(), loc, added:Date.now()});
+  }
+  shopList = shopList.filter(i=>!i.checked);
+  savePantry(); saveShop(); renderShop();
+  alert(`Added ${checked.length} item(s) to your pantry!`);
+}
+function saveShop() { localStorage.setItem('pkd-shop',JSON.stringify(shopList)); }
 
-<div class="bg-white rounded-xl shadow p-6 border border-stone-100">
-<div class="space-y-6">
+// ============ SODIUM TRACKER ============
+function getTodayKey() { return new Date().toISOString().slice(0,10); }
 
-<div>
-  <h3 class="font-bold text-blue-700 mb-2">1. Start Rice (0:00)</h3>
-  <p class="text-sm text-stone-700">Cook full bag of Kroger rice per package directions. This makes rice for ~6 servings across the week. Set and forget.</p>
-</div>
+function renderSodium() {
+  const today = getTodayKey();
+  if(!sodiumLog[today]) sodiumLog[today]={total:0,meals:[]};
+  const data = sodiumLog[today];
+  const pct = Math.min(100, data.total/2000*100);
+  let color = 'bg-green-500';
+  if(data.total>1700) color='bg-red-500';
+  else if(data.total>1200) color='bg-yellow-500';
 
-<div>
-  <h3 class="font-bold text-blue-700 mb-2">2. Prep Chicken (0:05)</h3>
-  <p class="text-sm text-stone-700">Chicken should be thawed (moved to fridge Friday night). Split into two batches:</p>
-  <ul class="text-sm text-stone-600 mt-1 space-y-1">
-    <li>• <strong>Batch A (lunch):</strong> ~1.5 lb — season with pepper, garlic, lemon juice. Bake at 400°F, 22–25 min.</li>
-    <li>• <strong>Batch B (dinner):</strong> ~1 lb — season with pepper, rosemary, olive oil. Same oven, same time.</li>
-  </ul>
-</div>
+  document.getElementById('sodium-today').innerHTML = `
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-stone-200">
+      <div class="flex justify-between items-end mb-2">
+        <div>
+          <span class="text-3xl font-bold">${data.total}</span>
+          <span class="text-stone-400 text-sm">/ 2,000 mg</span>
+        </div>
+        <span class="text-xs text-stone-400">${today}</span>
+      </div>
+      <div class="w-full bg-stone-200 rounded-full h-4 overflow-hidden">
+        <div class="${color} h-4 rounded-full transition-all duration-500" style="width:${pct}%"></div>
+      </div>
+      ${data.meals.length ? `<div class="mt-2 text-xs text-stone-500">${data.meals.map(m=>`${m.name} (+${m.sodium}mg)`).join(' · ')}</div>` : ''}
+    </div>`;
 
-<div>
-  <h3 class="font-bold text-blue-700 mb-2">3. Roast Vegetables (0:05, same oven)</h3>
-  <p class="text-sm text-stone-700">On separate sheet pans alongside chicken:</p>
-  <ul class="text-sm text-stone-600 mt-1 space-y-1">
-    <li>• <strong>Sweet potatoes:</strong> Cube all ~2.2 lb, toss with olive oil + pepper. 400°F, 25–30 min.</li>
-    <li>• <strong>Asparagus:</strong> Trim, toss with olive oil + pepper. Add to oven last 12 min.</li>
-    <li>• <strong>Broccoli:</strong> Cut into florets, toss with olive oil + pepper. 400°F, 20 min.</li>
-    <li>• <strong>Bell pepper:</strong> Slice 1 pack, toss on pan with broccoli.</li>
-  </ul>
-</div>
+  // Recipe buttons
+  document.getElementById('sodium-recipes').innerHTML = recipes.map(r=>
+    `<button onclick="logSodium(${r.id})" class="text-xs px-2 py-1 rounded-full border border-stone-300 bg-white hover:bg-brand-50">${r.name} <span class="text-stone-400">${r.sodium}mg</span></button>`
+  ).join('');
 
-<div>
-  <h3 class="font-bold text-blue-700 mb-2">4. Cook Sausage (0:10)</h3>
-  <p class="text-sm text-stone-700">Cook country style breakfast sausage in skillet — full package. Cool and store. Reheat portions each morning.</p>
-</div>
+  // History
+  const days = [];
+  for(let i=6;i>=0;i--) {
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const key = d.toISOString().slice(0,10);
+    days.push({key, total:(sodiumLog[key]||{total:0}).total, label:d.toLocaleDateString('en',{weekday:'short'})});
+  }
+  document.getElementById('sodium-history').innerHTML = `
+    <div class="flex items-end gap-1 h-32">
+      ${days.map(d=>{
+        const h = Math.max(4, d.total/2000*100);
+        let c='bg-green-400'; if(d.total>1700) c='bg-red-400'; else if(d.total>1200) c='bg-yellow-400';
+        return `<div class="flex-1 flex flex-col items-center gap-1">
+          <span class="text-[10px] text-stone-400">${d.total||'-'}</span>
+          <div class="${c} rounded-t w-full" style="height:${h}%"></div>
+          <span class="text-[10px] text-stone-500">${d.label}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
 
-<div>
-  <h3 class="font-bold text-blue-700 mb-2">5. Portion into Containers (0:40)</h3>
-  <p class="text-sm text-stone-700">Once everything is cool:</p>
-  <ul class="text-sm text-stone-600 mt-1 space-y-1">
-    <li>• 4 lunch containers: rice + chicken A + broccoli + bell pepper</li>
-    <li>• 4 dinner containers: chicken B + sweet potato + asparagus</li>
-    <li>• Sausage in separate container (grab 3 links each morning)</li>
-  </ul>
-</div>
+function logSodium(id) {
+  const r = recipes.find(x=>x.id===id);
+  if(!r) return;
+  const today = getTodayKey();
+  if(!sodiumLog[today]) sodiumLog[today]={total:0,meals:[]};
+  sodiumLog[today].total += r.sodium;
+  sodiumLog[today].meals.push({name:r.name,sodium:r.sodium});
+  localStorage.setItem('pkd-sodium',JSON.stringify(sodiumLog));
+  renderSodium();
+}
 
-<div>
-  <h3 class="font-bold text-blue-700 mb-2">6. Wash &amp; Prep Produce</h3>
-  <p class="text-sm text-stone-700">Wash romaine, herbs, cucumber. Store herbs in damp paper towel in bag. Cut nothing that browns — prep avocado fresh each morning.</p>
-</div>
+// ============ INIT ============
+document.getElementById('recipe-search').addEventListener('input', renderRecipes);
+document.getElementById('recipe-filter').addEventListener('change', renderRecipes);
 
-</div>
-</div>
-</section>
-
-<!-- ===================== THAWING SCHEDULE ===================== -->
-<section id="thaw" class="mb-12">
-<h2 class="text-2xl font-bold mb-1 text-red-800">🧊 Thawing Schedule</h2>
-<p class="text-stone-500 mb-6">Move from freezer → fridge. Takes 24 hours to thaw safely.</p>
-
-<div class="bg-white rounded-xl shadow overflow-hidden border border-stone-100">
-<table class="w-full text-sm">
-<thead class="bg-red-50">
-  <tr>
-    <th class="text-left p-3 font-semibold text-red-800">Move to Fridge</th>
-    <th class="text-left p-3 font-semibold text-red-800">Protein</th>
-    <th class="text-left p-3 font-semibold text-red-800">Use On</th>
-  </tr>
-</thead>
-<tbody class="divide-y divide-stone-100">
-  <tr>
-    <td class="p-3 font-medium">Friday (before Week 1)</td>
-    <td class="p-3">Tyson Chicken Breast (full pack)</td>
-    <td class="p-3">Sunday Prep → Mon–Thu meals</td>
-  </tr>
-  <tr>
-    <td class="p-3 font-medium">Friday (before Week 1)</td>
-    <td class="p-3">Country Style Breakfast Sausage</td>
-    <td class="p-3">Sunday Prep → Mon–Thu breakfast</td>
-  </tr>
-  <tr class="bg-stone-50">
-    <td class="p-3 font-medium">Wednesday</td>
-    <td class="p-3">Jumbo Raw Shrimp</td>
-    <td class="p-3">Friday dinner + Saturday lunch</td>
-  </tr>
-  <tr>
-    <td class="p-3 font-medium">Wednesday</td>
-    <td class="p-3">Apple Maple Breakfast Links</td>
-    <td class="p-3">Friday &amp; Sunday breakfast</td>
-  </tr>
-  <tr class="bg-stone-50">
-    <td class="p-3 font-medium">Thursday</td>
-    <td class="p-3">Beef Stir Fry</td>
-    <td class="p-3">Saturday dinner</td>
-  </tr>
-  <tr>
-    <td class="p-3 font-medium">Thursday</td>
-    <td class="p-3">Smoked Turkey</td>
-    <td class="p-3">Saturday breakfast + Sunday lunch</td>
-  </tr>
-</tbody>
-</table>
-</div>
-
-<div class="mt-4 bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-800">
-  <strong>⚠️ Quick-thaw backup:</strong> Submerge sealed package in cold water, change water every 30 min. Shrimp thaws in ~20 min, chicken in ~1 hour, beef in ~30 min.
-</div>
-</section>
-
-<!-- ===================== INVENTORY ===================== -->
-<section id="inventory" class="mb-12 page-break">
-<h2 class="text-2xl font-bold mb-1 text-stone-800">📦 What You Already Have</h2>
-<p class="text-stone-500 mb-6">Organized by storage location. All from Kroger receipt — $174.24 total.</p>
-
-<div class="grid md:grid-cols-3 gap-6">
-
-<!-- FRIDGE -->
-<div class="bg-white rounded-xl shadow p-5 border border-blue-100">
-  <h3 class="font-bold text-blue-700 mb-3 flex items-center gap-2">❄️ Fridge</h3>
-  <ul class="text-sm space-y-1 text-stone-700">
-    <li>☐ Simple Truth Eggs (12)</li>
-    <li>☐ Cilantro organic</li>
-    <li>☐ Parsley organic</li>
-    <li>☐ Basil (80Acres)</li>
-    <li>☐ Dill</li>
-    <li>☐ Rosemary</li>
-    <li>☐ Broccoli</li>
-    <li>☐ Romaine Hearts organic</li>
-    <li>☐ Cucumbers organic x2</li>
-    <li>☐ Bell Peppers x2 packs</li>
-    <li>☐ Asparagus (~0.93 lb)</li>
-    <li>☐ Cauliflower organic</li>
-    <li>☐ Grape tomatoes organic</li>
-    <li>☐ Lemons x3</li>
-    <li>☐ Ginger root</li>
-    <li>☐ Blueberries</li>
-    <li>☐ Sabra Hummus</li>
-    <li>☐ Simple Truth Mustard</li>
-    <li>☐ Kalamata Olives</li>
-    <li>☐ Fresh Made Tray</li>
-  </ul>
-</div>
-
-<!-- COUNTER -->
-<div class="bg-white rounded-xl shadow p-5 border border-yellow-100">
-  <h3 class="font-bold text-yellow-700 mb-3 flex items-center gap-2">🍌 Counter</h3>
-  <ul class="text-sm space-y-1 text-stone-700">
-    <li>☐ Bananas organic (~1.6 lb)</li>
-    <li>☐ Avocados Hass x3</li>
-    <li>☐ Tomatoes cluster (~2.24 lb)</li>
-    <li>☐ Sweet potatoes (~2.2 lb)</li>
-    <li>☐ Red onion (~0.87 lb)</li>
-    <li>☐ Yellow onion (~0.55 lb)</li>
-    <li>☐ Garlic</li>
-    <li>☐ Fuji Apples (~0.94 lb)</li>
-  </ul>
-</div>
-
-<!-- FREEZER -->
-<div class="bg-white rounded-xl shadow p-5 border border-indigo-100">
-  <h3 class="font-bold text-indigo-700 mb-3 flex items-center gap-2">🧊 Freezer</h3>
-  <ul class="text-sm space-y-1 text-stone-700">
-    <li>☐ Tyson Chicken Breast (~2-3 lb)</li>
-    <li>☐ Smoked Turkey (~1-2 lb)</li>
-    <li>☐ Beef Stir Fry (~0.75 lb)</li>
-    <li>☐ Apple Maple Breakfast Links</li>
-    <li>☐ Country Style Breakfast Sausage</li>
-    <li>☐ Jumbo Raw Shrimp</li>
-  </ul>
-</div>
-
-<!-- PANTRY -->
-<div class="bg-white rounded-xl shadow p-5 border border-amber-100">
-  <h3 class="font-bold text-amber-700 mb-3 flex items-center gap-2">🏪 Pantry</h3>
-  <ul class="text-sm space-y-1 text-stone-700">
-    <li>☐ Kroger Rice</li>
-    <li>☐ La Bendita Tortillas</li>
-    <li>☐ Starkist Tuna Chunk x2</li>
-    <li>☐ Walnuts halves</li>
-    <li>☐ Nut and Seed mix</li>
-    <li>☐ Olive oil</li>
-    <li>☐ Black pepper</li>
-  </ul>
-</div>
-
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="text-center text-stone-400 text-sm py-8 border-t border-stone-200">
-  <p>Built for Rory's kidneys 💚 Last updated: <script>document.write(new Date().toLocaleDateString())</script></p>
-</footer>
-
-</div>
+switchTab('recipes');
+</script>
 </body>
 </html>
