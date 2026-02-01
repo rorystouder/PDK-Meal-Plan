@@ -65,12 +65,18 @@ body{padding-bottom:env(safe-area-inset-bottom,0)}
       <h2 class="text-lg font-bold">🥬 My Pantry</h2>
       <button onclick="clearPantry()" class="text-xs text-red-500 hover:text-red-700">Clear All</button>
     </div>
-    <div class="flex gap-2 mb-3">
-      <input id="pantry-input" type="text" placeholder="Add custom item…" class="flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm" onkeydown="if(event.key==='Enter')addPantryCustom()">
+    <div class="flex gap-2 mb-2">
+      <input id="pantry-input" type="text" placeholder="Item name…" class="flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm" onkeydown="if(event.key==='Enter')addPantryCustom()">
       <select id="pantry-loc" class="px-2 py-2 rounded-lg border border-stone-300 text-sm bg-white">
         <option>🧊 Fridge</option><option>❄️ Freezer</option><option>🏠 Pantry</option><option>🥦 Produce</option>
       </select>
-      <button onclick="addPantryCustom()" class="bg-brand-600 text-white px-3 py-2 rounded-lg text-sm font-medium">+</button>
+    </div>
+    <div class="flex gap-2 mb-3">
+      <input id="pantry-qty" type="number" min="0" step="any" placeholder="Qty" class="w-16 px-2 py-2 rounded-lg border border-stone-300 text-sm text-center">
+      <select id="pantry-unit" class="px-2 py-2 rounded-lg border border-stone-300 text-sm bg-white">
+        <option value="">—</option><option value="ct">ct</option><option value="oz">oz</option><option value="lb">lb</option><option value="g">g</option><option value="cup">cup</option><option value="can">can</option><option value="bag">bag</option><option value="bunch">bunch</option><option value="pkg">pkg</option><option value="bottle">bottle</option><option value="jar">jar</option>
+      </select>
+      <button onclick="addPantryCustom()" class="flex-1 bg-brand-600 text-white px-3 py-2 rounded-lg text-sm font-medium">+ Add</button>
     </div>
     <!-- Quick add buttons -->
     <div class="mb-4">
@@ -305,8 +311,9 @@ function renderPantry() {
     html += items.map(p=>{
       const age = (now - p.added)/(1000*60*60*24);
       const expireWarn = (l==='🥦 Produce' && age>5) || (l==='🧊 Fridge' && ['chicken','turkey','beef','steak','shrimp','salmon','ground'].some(m=>p.name.toLowerCase().includes(m)) && age>3);
+      const qtyStr = p.qty ? `<span class="text-xs font-medium text-brand-700 bg-brand-100 px-1.5 py-0.5 rounded cursor-pointer" onclick="editPantryQty('${p.id}')">${p.qty}${p.unit?' '+p.unit:''}</span> ` : '';
       return `<div class="flex items-center justify-between py-1.5 px-2 rounded ${expireWarn?'bg-amber-50 border border-amber-200':''}">
-        <span class="text-sm ${expireWarn?'text-amber-700':''}">${expireWarn?'⚠️ ':'' }${p.name} <span class="text-xs text-stone-400">${Math.floor(age)}d ago</span></span>
+        <span class="text-sm ${expireWarn?'text-amber-700':''}">${expireWarn?'⚠️ ':''}${qtyStr}${p.name} <span class="text-xs text-stone-400">${Math.floor(age)}d ago</span></span>
         <button onclick="removePantryItem('${p.id}')" class="text-red-400 hover:text-red-600 text-lg leading-none">&times;</button>
       </div>`;
     }).join('');
@@ -315,16 +322,27 @@ function renderPantry() {
   document.getElementById('pantry-list').innerHTML = html || '<p class="text-center text-stone-400 py-4">Pantry is empty. Add some items!</p>';
 }
 
-function addPantryItem(name, loc) {
-  pantry.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, loc, added:Date.now()});
+function addPantryItem(name, loc, qty, unit) {
+  pantry.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, loc, qty:qty||null, unit:unit||'', added:Date.now()});
   savePantry(); renderPantry();
 }
 function addPantryCustom() {
   const inp = document.getElementById('pantry-input');
   const name = inp.value.trim();
   if(!name) return;
-  addPantryItem(name, document.getElementById('pantry-loc').value);
-  inp.value='';
+  const qty = parseFloat(document.getElementById('pantry-qty').value)||null;
+  const unit = document.getElementById('pantry-unit').value;
+  addPantryItem(name, document.getElementById('pantry-loc').value, qty, unit);
+  inp.value=''; document.getElementById('pantry-qty').value=''; document.getElementById('pantry-unit').value='';
+}
+function editPantryQty(id) {
+  const item = pantry.find(p=>p.id===id);
+  if(!item) return;
+  const input = prompt(`Update qty for ${item.name}:`, item.qty||'');
+  if(input===null) return;
+  const val = parseFloat(input);
+  if(!isNaN(val) && val>0) { item.qty=val; } else if(input==='') { item.qty=null; }
+  savePantry(); renderPantry();
 }
 function removePantryItem(id) {
   pantry = pantry.filter(p=>p.id!==id);
