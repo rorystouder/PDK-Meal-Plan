@@ -46,15 +46,15 @@ body{padding-bottom:env(safe-area-inset-bottom,0)}
 <main class="max-w-2xl mx-auto px-4 py-4" id="app">
   <!-- Recipes Tab -->
   <div id="tab-recipes" class="tab-content active">
-    <div class="flex gap-2 mb-3 flex-wrap">
-      <input id="recipe-search" type="text" placeholder="Search recipes or ingredients…" class="flex-1 min-w-[200px] px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400">
-      <select id="recipe-filter" class="px-3 py-2 rounded-lg border border-stone-300 text-sm bg-white">
-        <option value="All">All</option>
-        <option value="Breakfast">🍳 Breakfast</option>
-        <option value="Lunch">🥗 Lunch</option>
-        <option value="Dinner">🍖 Dinner</option>
-        <option value="Snack">🥜 Snack</option>
-      </select>
+    <div class="flex gap-2 mb-3 overflow-x-auto pb-1">
+      <button onclick="filterRecipes('All')" class="cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-brand-600 text-white whitespace-nowrap" data-cat="All">All</button>
+      <button onclick="filterRecipes('Breakfast')" class="cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-stone-200 text-stone-600 whitespace-nowrap" data-cat="Breakfast">🍳 Breakfast</button>
+      <button onclick="filterRecipes('Lunch')" class="cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-stone-200 text-stone-600 whitespace-nowrap" data-cat="Lunch">🥗 Lunch</button>
+      <button onclick="filterRecipes('Dinner')" class="cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-stone-200 text-stone-600 whitespace-nowrap" data-cat="Dinner">🍖 Dinner</button>
+      <button onclick="filterRecipes('Snack')" class="cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-stone-200 text-stone-600 whitespace-nowrap" data-cat="Snack">🥜 Snack</button>
+    </div>
+    <div class="mb-3">
+      <input id="recipe-search" type="text" placeholder="Search recipes or ingredients…" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400">
     </div>
     <div id="recipe-list"></div>
   </div>
@@ -311,16 +311,37 @@ function switchTab(tab) {
 }
 
 // ============ RECIPES ============
+let activeCatFilter = 'All';
+function filterRecipes(cat) {
+  activeCatFilter = cat;
+  document.querySelectorAll('.cat-filter').forEach(b => {
+    b.className = b.dataset.cat === cat
+      ? 'cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-brand-600 text-white whitespace-nowrap'
+      : 'cat-filter px-4 py-2 rounded-full text-sm font-semibold bg-stone-200 text-stone-600 whitespace-nowrap';
+  });
+  renderRecipes();
+}
 function renderRecipes() {
   const q = document.getElementById('recipe-search').value.toLowerCase();
-  const cat = document.getElementById('recipe-filter').value;
+  const cat = activeCatFilter;
   const filtered = recipes.filter(r => {
     if(cat!=='All' && r.category!==cat) return false;
     if(q && !r.name.toLowerCase().includes(q) && !r.ingredients.some(i=>i.toLowerCase().includes(q))) return false;
     return true;
   });
+  const catOrder = {Breakfast:0, Lunch:1, Dinner:2, Snack:3};
+  filtered.sort((a,b) => (catOrder[a.category]||0) - (catOrder[b.category]||0));
   const icons = {Breakfast:'🍳',Lunch:'🥗',Dinner:'🍖',Snack:'🥜'};
-  document.getElementById('recipe-list').innerHTML = filtered.map(r=>`
+  let lastCat = '';
+  let countByCategory = {};
+  filtered.forEach(r => { countByCategory[r.category] = (countByCategory[r.category]||0)+1; });
+  document.getElementById('recipe-list').innerHTML = filtered.map(r=>{
+    let header = '';
+    if(cat==='All' && r.category!==lastCat) {
+      lastCat = r.category;
+      header = `<div class="flex items-center gap-2 mt-4 mb-2 first:mt-0"><h2 class="text-lg font-bold">${icons[r.category]} ${r.category}</h2><span class="text-xs text-stone-400">${countByCategory[r.category]} recipes</span></div>`;
+    }
+    return header+`
     <div class="recipe-card bg-white rounded-xl shadow-sm border border-stone-200 mb-3 overflow-hidden">
       <div class="p-4 cursor-pointer" onclick="toggleRecipe(${r.id})">
         <div class="flex items-center justify-between">
@@ -346,7 +367,7 @@ function renderRecipes() {
         </div>
       </div>
     </div>
-  `).join('') || '<p class="text-center text-stone-400 py-8">No recipes found</p>';
+  `}).join('') || '<p class="text-center text-stone-400 py-8">No recipes found</p>';
 }
 
 function toggleRecipe(id) {
@@ -592,7 +613,6 @@ function logSodium(id) {
 
 // ============ INIT ============
 document.getElementById('recipe-search').addEventListener('input', renderRecipes);
-document.getElementById('recipe-filter').addEventListener('change', renderRecipes);
 
 switchTab('recipes');
 </script>
